@@ -13,6 +13,9 @@ class MoviesController < ApplicationController
   def index
     @all_ratings=Movie.select(:rating).map(&:rating).uniq #https://stackoverflow.com/questions/8369812/rails-how-can-i-get-unique-values-from-column
     @selected_ratings = checked_ratings
+    @selected_ratings.each do |rating| #remember which selected on reload
+      params[rating] = true
+    end
     
     if params[:sort]
       @movies = Movie.order(params[:sort])
