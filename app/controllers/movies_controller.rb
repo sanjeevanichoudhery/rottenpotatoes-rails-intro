@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
     else
       @movies=Movie.all
     end
-    @movies = Movie.where(:rating => @selected_ratings)
+    #@movies = Movie.where(:rating => @selected_ratings)
   end
 
   def new
