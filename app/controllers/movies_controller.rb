@@ -14,10 +14,12 @@ class MoviesController < ApplicationController
     @all_ratings=Movie.select(:rating).map(&:rating).uniq #https://stackoverflow.com/questions/8369812/rails-how-can-i-get-unique-values-from-column
     @selected_ratings = checked_ratings
     
-    #@movies = Movie.all
-    @movies = Movie.order(params[:sort]) #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
+    if params[:sort]
+      @movies = Movie.order(params[:sort]) #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
+    else
+      @movies=Movie.all
+    end
     @movies = Movie.where(:rating => @selected_ratings)
-    
   end
 
   def new
