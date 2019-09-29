@@ -11,13 +11,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
+    #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
     @movies = Movie.all
-    if params[:sort] 
-      @movies = Movie.order(params[:sort])
-    else
-      @movies = Movie.all
-    end
+    @movies = Movie.order(params[:sort])
   end
 
   def new
