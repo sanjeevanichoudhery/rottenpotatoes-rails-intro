@@ -46,6 +46,6 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   def checked_ratings
-      @ratings.keys
+      params[:ratings].keys
   end
 end
