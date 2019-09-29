@@ -11,9 +11,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
+    @all_ratings=Movie.select(:rating).map(&:rating).uniq #https://stackoverflow.com/questions/8369812/rails-how-can-i-get-unique-values-from-column
     @movies = Movie.all
-    @movies = Movie.order(params[:sort])
+    @movies = Movie.order(params[:sort]) #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
   end
 
   def new
