@@ -11,9 +11,11 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @all_ratings=Movie.select(:rating).map(&:rating).uniq #https://stackoverflow.com/questions/8369812/rails-how-can-i-get-unique-values-from-column
     @movies = Movie.all
     @movies = Movie.order(params[:sort]) #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
+    @all_ratings=Movie.select(:rating).map(&:rating).uniq #https://stackoverflow.com/questions/8369812/rails-how-can-i-get-unique-values-from-column
+    @selected_ratings = checked_ratings
+    
   end
 
   def new
@@ -43,5 +45,7 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-
+  def checked_ratings
+      @ratings.keys
+  end
 end
