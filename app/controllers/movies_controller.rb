@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     @selected_ratings = checked_ratings
     @movies=Movie.all
     @movies = Movie.order(params[:sort])
-    @movies = Movie.where(:rating => @selected_ratings)
+    #@movies = Movie.where(:rating => @selected_ratings)
       #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
   end
 
