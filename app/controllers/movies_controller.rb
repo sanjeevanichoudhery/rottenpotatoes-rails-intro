@@ -15,8 +15,10 @@ class MoviesController < ApplicationController
     @selected_ratings = checked_ratings
     @movies=Movie.all
     @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
-    #@movies = Movie.where("rating in (?)", @ratings.keys).find(:all, :order => @category)
-      #https://stackoverflow.com/questions/19968638/refactoring-ruby-on-rails-link-to-with-sorting
+    
+    
+    session[:ratings] = params[:ratings]
+    session[:sort] = params[:sort]
   end
 
   def new
