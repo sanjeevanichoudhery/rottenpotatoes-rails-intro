@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @all_ratings=Movie.all_ratings
+    @all_ratings=Movie.select(:ratings).map(&:ratings).uniq
     # if params[:sort]
     #   session[:sort] = params[:sort]
     # elsif session[:sort]
