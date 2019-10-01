@@ -14,12 +14,12 @@ class MoviesController < ApplicationController
     @all_ratings=Movie.select(:rating).map(&:rating).uniq
     @selected_ratings = checked_ratings
     
-    redirect = false
+    only_one_params = false
     if params[:sort]
       session[:sort] = params[:sort]
     elsif session[:sort]
       params[:sort] = session[:sort]
-      redirect = true
+      only_one_params = true
     else
       params[:sort] = nil
     end
@@ -28,12 +28,12 @@ class MoviesController < ApplicationController
       session[:ratings] = params[:ratings]
     elsif session[:ratings]
       params[:ratings] = session[:ratings]
-      redirect = true
+      only_one_params = true
     else
       params[:ratings] = nil
     end
 
-    if redirect
+    if only_one_params
       flash.keep
       redirect_to movies_path({:sort => params[:sort], :ratings => params[:ratings]})
     end
