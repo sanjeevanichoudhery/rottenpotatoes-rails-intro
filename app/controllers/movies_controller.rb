@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    
     if params[:sort]
       session[:sort] = params[:sort]
     elsif session[:sort]
@@ -35,7 +36,7 @@ class MoviesController < ApplicationController
     elsif params[:ratings]
       @movies = Movie.where(:rating =>@selected_ratings)
     elsif params[:sort]
-       @movies = Movie.order(params[:sort])
+      @movies = Movie.order(params[:sort])
     else
       @movies = Movie.all
     end  
