@@ -12,21 +12,21 @@ class MoviesController < ApplicationController
 
   def index
     
-    if params[:sort]
-      session[:sort] = params[:sort]
-    elsif session[:sort]
-      params[:sort] = session[:sort_by]
-    else
-      params[:sort] = nil
-    end
+    # if params[:sort]
+    #   session[:sort] = params[:sort]
+    # elsif session[:sort]
+    #   params[:sort] = session[:sort_by]
+    # else
+    #   params[:sort] = nil
+    # end
 
-    if params[:ratings]
-      session[:ratings] = params[:ratings]
-    elsif session[:ratings]
-      params[:ratings] = session[:ratings]
-    else
-      params[:ratings] = nil
-    end
+    # if params[:ratings]
+    #   session[:ratings] = params[:ratings]
+    # elsif session[:ratings]
+    #   params[:ratings] = session[:ratings]
+    # else
+    #   params[:ratings] = nil
+    # end
 
     
     
