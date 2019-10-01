@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
+    @all_ratings=Movie.all_ratings
     # if params[:sort]
     #   session[:sort] = params[:sort]
     # elsif session[:sort]
@@ -28,7 +28,6 @@ class MoviesController < ApplicationController
     #   params[:ratings] = nil
     # end
 
-    
     
     
     if params[:sort] and params[:ratings]
