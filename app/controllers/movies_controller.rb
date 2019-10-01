@@ -14,10 +14,12 @@ class MoviesController < ApplicationController
     @all_ratings=Movie.select(:rating).map(&:rating).uniq
     @selected_ratings = checked_ratings
     
+    redirect = false
     if params[:sort]
       session[:sort] = params[:sort]
     elsif session[:sort]
       params[:sort] = session[:sort]
+      redirect = true
     else
       params[:sort] = nil
     end
@@ -26,11 +28,15 @@ class MoviesController < ApplicationController
       session[:ratings] = params[:ratings]
     elsif session[:ratings]
       params[:ratings] = session[:ratings]
+      redirect = true
     else
       params[:ratings] = nil
     end
 
-    
+    if redirect
+      flash.keep
+      redirect_to movies_path({:sort => params[:sort], :ratings => params[:ratings]})
+    end
     
     if params[:sort] and params[:ratings]
       @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
@@ -71,6 +77,7 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+  
   def checked_ratings
     if params[:ratings]
       params[:ratings].keys
@@ -78,4 +85,5 @@ class MoviesController < ApplicationController
       @all_ratings
     end
   end
+  
 end
