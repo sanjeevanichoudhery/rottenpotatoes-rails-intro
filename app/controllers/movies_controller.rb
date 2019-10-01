@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings=Movie.select(:rating).map(&:rating).uniq
+    @selected_ratings = checked_ratings
     # if params[:sort]
     #   session[:sort] = params[:sort]
     # elsif session[:sort]
@@ -31,7 +32,6 @@ class MoviesController < ApplicationController
     
     
     if params[:sort] and params[:ratings]
-      @selected_ratings = checked_ratings
       @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
     elsif params[:ratings]
       @selected_ratings = checked_ratings
