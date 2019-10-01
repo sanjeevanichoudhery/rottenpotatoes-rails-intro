@@ -32,8 +32,10 @@ class MoviesController < ApplicationController
     
     
     if params[:sort] and params[:ratings]
+      @selected_ratings = checked_ratings
       @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
     elsif params[:ratings]
+      @selected_ratings = checked_ratings
       @movies = Movie.where(:rating =>@selected_ratings)
     elsif params[:sort]
       @movies = Movie.order(params[:sort])
