@@ -1,0 +1,2 @@
+HW2 rottenpotatoes github:  https://github.com/sanjeevanichoudhery/rottenpotatoes-rails-intro.git
+HW2 rottenpotatoes heroku:  https://still-dusk-04384.herokuapp.com
