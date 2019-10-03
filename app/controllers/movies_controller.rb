@@ -11,33 +11,40 @@ class MoviesController < ApplicationController
   end
 
   def index
+    #just the ratings that were checked 
     @all_ratings=Movie.select(:rating).map(&:rating).uniq
     @selected_ratings = checked_ratings
     
-    only_one_params = false
+    #save the sorting parameter in the session for when we come back
+    #if there is a sorting param in the session, load it in
+    redirect_params = false
     if params[:sort]
       session[:sort] = params[:sort]
     elsif session[:sort]
       params[:sort] = session[:sort]
-      only_one_params = true
+      redirect_params = true
     else
       params[:sort] = nil
     end
 
+    #save the selected ratings in the session for when we come back
+    #if there is a rating param in the session, load it in
     if params[:ratings]
       session[:ratings] = params[:ratings]
     elsif session[:ratings]
       params[:ratings] = session[:ratings]
-      only_one_params = true
+      redirect_params = true
     else
       params[:ratings] = nil
     end
 
-    if only_one_params
+    #if params loaded from session, redirect
+    if redirect_params
       flash.keep
       redirect_to movies_path({:sort => params[:sort], :ratings => params[:ratings]})
     end
     
+    #apply filters to the data
     if params[:sort] and params[:ratings]
       @movies = Movie.where(:rating => @selected_ratings).order(params[:sort])
     elsif params[:ratings]
@@ -78,6 +85,7 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   
+  #function to get the checkboxes selected
   def checked_ratings
     if params[:ratings]
       params[:ratings].keys
